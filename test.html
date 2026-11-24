@@ -206,6 +206,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 
 <a class="btn dark" href="index.html" style="text-decoration:none">Качать эту мышцу в тренажёре →</a>
 <button class="btn" id="share">Сохранить карточку для сторис</button>
+<button class="btn light" id="friend">Отправить тест другу</button>
 
 <div class="cta">
 <h3>Прокачай все четыре мышцы</h3>
@@ -409,11 +410,12 @@ $('share').onclick=async()=>{
   const w=Math.max(46,520*res.str[k]/100);rr(x,330,yy-22,w,46,23);x.fillStyle=k===res.weak?'#111':'#FFD31A';x.fill();x.stroke();
   x.fillStyle='#111';x.font="700 36px Unbounded";x.textAlign='right';x.fillText(res.str[k]+'%',990,yy+14);x.textAlign='left'});
  x.font="800 42px Manrope";x.fillText('Мой стиль: '+TYPES[res.type].t.toLowerCase(),80,1720);
- x.fillStyle='#111';rr(x,60,1770,960,100,30);x.fill();x.fillStyle='#FFD31A';x.font="800 38px Manrope";x.fillText('Пройди тест · @nikolay_lemmer',110,1834);
+ x.fillStyle='#111';rr(x,60,1770,960,100,30);x.fill();x.fillStyle='#FFD31A';x.font="800 38px Manrope";x.fillText('Пройди тест: t.me/kachaem_kreatiff_bot',110,1834);
  const url=c.toDataURL('image/png'); $('ov-img').src=url; $('ov').classList.add('on');
  try{c.toBlob(b=>{shareBlob=b;const f=new File([b],'moya-slabaya-myshca.png',{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[f]}))$('ov-share').style.display='flex'})}catch(e){}
 };
 $('ov-share').onclick=async()=>{try{const f=new File([shareBlob],'moya-slabaya-myshca.png',{type:'image/png'});await navigator.share({files:[f],title:'Моя слабая мышца'})}catch(e){}};
+$('friend').onclick=()=>{const u='https://t.me/share/url?url='+encodeURIComponent('https://t.me/kachaem_kreatiff_bot')+'&text='+encodeURIComponent('Прошёл тест «Твоя слабая мышца» — у меня проседает '+(res?M[res.weak].name.toLowerCase():'одна из мышц')+'. Проверь свою:');if(TG){try{TG.openTelegramLink(u);return}catch(e){}}window.open(u,'_blank')};
 $('ov-close').onclick=()=>$('ov').classList.remove('on');
 
 /* restore previous result */

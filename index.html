@@ -267,6 +267,7 @@ textarea:focus,input:focus{outline:3px solid var(--y);outline-offset:1px}
 <p>Тетрадь прогресса на 30 дней — напиши в <s>нельзя</s>граме <b>@nikolay_lemmer</b> слово <b>КРЕАТИФФ</b>.</p>
 <div class="row2"><button class="btn sm" id="copyW">Скопировать слово</button><a class="btn sm light" href="https://t.me/a_shto_dalshe" target="_blank" rel="noopener">Канал</a></div>
 </div>
+<button class="btn sm light" id="shareBot">Позвать друга в тренажёр</button>
 <button class="btn sm light" id="chMus">Сменить главную мышцу</button>
 <button class="back" id="reset" style="align-self:center;color:var(--mut);text-decoration:underline">Сбросить весь прогресс</button>
 <p class="muted" style="text-align:center;font-size:12px">Упражнения по книгам Намаконова, Рубина, Альтшуллера, Микалко, де Боно, Линча, Чиксентмихайи, Клеона. Прогресс хранится на этом устройстве.<br>Николай Леммер · @nikolay_lemmer</p>
@@ -664,6 +665,7 @@ function renderProg(){
  $('pChartE').textContent=cl.length?(cl.length>1?'Было '+cl[0].n+', сейчас '+cl[cl.length-1].n+'.':'Первый замер есть. Повтори через неделю.'):'Пока нет замеров. Сделай «Бодрую скрепку» в мышце «Синтез».';
 }
 function copy(t,m){(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast(m)).catch(()=>{const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');toast(m)}catch(e){toast('Не получилось скопировать')}a.remove()})}
+$('shareBot').onclick=()=>{const u='https://t.me/share/url?url='+encodeURIComponent('https://t.me/kachaem_kreatiff_bot')+'&text='+encodeURIComponent('Качаю креатив как мышцы: задание на 10 минут в день, банк идей и рост в цифрах. Присоединяйся:');if(TG){try{TG.openTelegramLink(u);return}catch(e){}}window.open(u,'_blank')};
 $('copyW').onclick=()=>copy('КРЕАТИФФ','Скопировано: КРЕАТИФФ');
 let resetArm=0;
 $('reset').onclick=()=>{if(Date.now()-resetArm>3000){resetArm=Date.now();toast('Нажми ещё раз, чтобы стереть всё');return}{try{localStorage.removeItem(KEY)}catch(e){}S=fresh();save();obSel=null;renderOb();go('ob')}};
